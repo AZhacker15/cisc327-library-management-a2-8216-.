@@ -239,6 +239,8 @@ def search_books_in_catalog(search_term: str, search_type: str) -> tuple[bool, s
 
     # Below are the 3 scenarios that might commence depending on which search type the patron is using
     if search_type == 'isbn':  # If it's ISBN it uses partial matching
+         if len(search_term) != 13 or not search_term.isdigit():
+            return False, "Invalid ISBN", [] 
         book_result = get_book_by_isbn(search_term)  # Uses the get book by isbn to look for the book
         if not book_result:
             return False, "Book not found.", []
@@ -314,3 +316,4 @@ def get_patron_status_report(patron_id: str) -> Tuple[bool, str, Dict]:
     return True, (f"List of books currently borrowed: {patron_status['Borrowed books']}"
                   f"\nBorrow dates and Due dates for the borrowed books: {patron_status['Due dates']}"
                   f"\nCurrent standing late fee $ {patron_status['Total fee']}"), patron_status
+
