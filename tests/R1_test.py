@@ -112,12 +112,13 @@ def test_multiple_errors():
 
 
 def test_bug_isbm_no_lettering():
-    # !This test shows a bug in which the ISBM value should not contain any letters.
+   # Fixed bug.
     isbm_numbers = get_random_ISBN()
     sub_isbm = isbm_numbers[0: 9]
     isbm_value = sub_isbm + "abcd"
 
     success, message = add_book_to_catalog("King Kong", "Delos Wheeler Lovelace", isbm_value, 5)
 
-    assert success == True  # This should give me assertion error.
-    assert 'Book "King Kong" has been successfully added to the catalog.' in message
+    assert success == False  # This should give me assertion error now.
+    assert 'ISBN must contain numbers.' in message 
+
