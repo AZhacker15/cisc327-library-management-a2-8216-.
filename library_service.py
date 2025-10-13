@@ -221,9 +221,11 @@ def search_books_in_catalog(search_term: str, search_type: str) -> tuple[bool, s
     """
 
     book_results = []
-    search_type = search_type.lower()  # Turns the input into lowercase to remove case sensitivity
+    # Turns the input into lowercase to remove case sensitivity
+    search_type = search_type.lower()  
     search_term = search_term.lower()
-    complete_catalog = get_all_books()  # Gets all the books
+    # Gets all the books
+    complete_catalog = get_all_books()  
 
     # Recommended by ChatGbt for AI-Assisted Test Generation in task 3 to test out database errors.
     if not complete_catalog or not isinstance(complete_catalog, list):
@@ -239,13 +241,17 @@ def search_books_in_catalog(search_term: str, search_type: str) -> tuple[bool, s
 
     # Below are the 3 scenarios that might commence depending on which search type the patron is using
     if search_type == 'isbn':  # If it's ISBN it uses partial matching
-         if len(search_term) != 13 or not search_term.isdigit():
+        if len(search_term) != 13 or not search_term.isdigit():
             return False, "Invalid ISBN", [] 
-        book_result = get_book_by_isbn(search_term)  # Uses the get book by isbn to look for the book
+        
+        # Uses the get book by isbn to look for the book
+        book_result = get_book_by_isbn(search_term)  
         if not book_result:
             return False, "Book not found.", []
         book_results.append(book_result)
-    if search_type == 'author':  # If it's either 'author' or 'title', use partial matching.
+    
+    # If it's either 'author' or 'title', use partial matching.
+    if search_type == 'author':  
         for books in complete_catalog:
             # Removes case sensitivity by turing the target into lowercase
             if search_term in books['author'].lower():
@@ -316,4 +322,5 @@ def get_patron_status_report(patron_id: str) -> Tuple[bool, str, Dict]:
     return True, (f"List of books currently borrowed: {patron_status['Borrowed books']}"
                   f"\nBorrow dates and Due dates for the borrowed books: {patron_status['Due dates']}"
                   f"\nCurrent standing late fee $ {patron_status['Total fee']}"), patron_status
+
 
