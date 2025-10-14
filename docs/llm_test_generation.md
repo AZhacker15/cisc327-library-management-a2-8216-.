@@ -292,7 +292,7 @@ Like before create 5 test cases that focus on the edge cases, especially databas
 The code that I received worked but there was a problem, I get an error on the last part where
 it tested out the edge case handling. The main issue was that there was no 
 **statement** that catches or properly acknowledges the database error itself. 
-Below is a snippet of what the error had said 
+Below is a snippet of what the error looked like.
 
 ```
 Should handle unexpected database failure gracefully instead of raising TypeError.
@@ -321,7 +321,7 @@ After editing the code and the test_case, when using `pytest`, all assertion pas
 
 ![Screenshot showing a positive LLM test case](good_a2.png)
 
-Below is a screenshot of the code that tests the edge case,
+Here is a screenshot of the code that tests the edge cases,
 
 ```bash
 @patch("library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
@@ -353,7 +353,7 @@ search functionality that uses the following parameters:
 - Support exact matching for ISBN
 - Return results in same format as catalog display
 
-Below is the prompt used following 
+Below is the prompt that I typed in
 
 ```
 Can you make another function to create 5 test cases on. This time using the function def search_books_in_catalog(search_term: str, search_type: str) which returns these criterias tuple[bool, str, list[Any]. The bool checks for the success of the function, the string gets the info and the list carries the book information.  The search term is literly what the the patron is looking for and the type is the type that they are searching. (Title, Author, ISBN)
@@ -561,3 +561,4 @@ LLM, also utilizes `patch@` to make the code independent when testing
 Finally, the most valuable test cases that are generated were the ones 
 that handles the edge cases, since it allows me to observe any crashes that it made
 so, I could later edit the code on preventing them from happening. 
+
