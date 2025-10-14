@@ -57,12 +57,36 @@ def library_setup():
     ]
 
     # Reset the database completely for repetitive testing.
+    # Creates a new table overall. 
     from database import get_db_connection
     conn = get_db_connection()
     try:
-        # Directly removes the book from the database.
-        conn.execute("DELETE FROM BOOKS")
-        conn.execute("DELETE FROM sqlite_sequence WHERE name='books'")
+        conn.execute('''
+                CREATE TABLE IF NOT EXISTS books (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    title TEXT NOT NULL,
+                    author TEXT NOT NULL,
+                    isbn TEXT UNIQUE NOT NULL,
+                    total_copies INTEGER NOT NULL,
+                    available_copies INTEGER NOT NULL
+                )
+            ''')
+
+        # Create borrow_records table
+        conn.execute('''
+                CREATE TABLE IF NOT EXISTS borrow_records (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    patron_id TEXT NOT NULL,
+                    book_id INTEGER NOT NULL,
+                    borrow_date TEXT NOT NULL,
+                    due_date TEXT NOT NULL,
+                    return_date TEXT,
+                    FOREIGN KEY (book_id) REFERENCES books (id)
+                )
+            ''')
+        conn.execute("DELETE FROM books")
+        conn.execute("DELETE FROM borrow_records")
+        conn.execute("DELETE FROM sqlite_sequence WHERE name IN ('books', 'borrow_records')")
         conn.commit()
     finally:
         conn.close()
@@ -81,3 +105,4 @@ def library_setup():
 
         assert success == True
         assert "Book" in message
+
