@@ -74,7 +74,7 @@ def test_valid_return2(library_setup):
         current_date = datetime.now()
 
         assert success == True
-        assert (f'Successfully returned "{first_title['title']}" on {current_date.strftime("%Y-%m-%d")}. '
+        assert (f'Successfully returned "{first_title["title"]}" on {current_date.strftime("%Y-%m-%d")}. '
                 f'Status Book is not overdue, no outstanding fees, Late fee: $0.00.') in message
 
 
@@ -233,3 +233,4 @@ def test_book_late_fee2(library_setup):
     assert success == True
     assert (f'Successfully returned "{random_book_name["title"]}" on {current_date.strftime("%Y-%m-%d")}. '
             f'Status Book is overdue by: {overdue_days} day(s), Late fee: ${overdue_days}.00.') in message
+
