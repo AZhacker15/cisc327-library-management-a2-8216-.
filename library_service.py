@@ -320,7 +320,9 @@ def get_patron_status_report(patron_id: str) -> Tuple[bool, str, Dict]:
     patron_status = {'Borrowed books': book_list, 'Due dates': due_dates, 'Total fee': total_fee_sum}
 
     return True, (f"List of books currently borrowed: {patron_status['Borrowed books']}"
+                  f"\nNumber of book borrowed: {len(book_list)}"
                   f"\nBorrow dates and Due dates for the borrowed books: {patron_status['Due dates']}"
-                  f"\nCurrent standing late fee $ {patron_status['Total fee']}"), patron_status
+                  f"\nCurrent standing late fee $ {patron_status['Total fee']:.2f}"), patron_status
+
 
 
