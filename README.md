@@ -5,7 +5,10 @@
 
 ## Overview
 
-This project contains a partial implementation of a Flask-based Library Management System with SQLite database, designed for CISC 327 (Software Quality Assurance) coursework.
+This project contains the basic framework for a Flask-based Library Management System with SQLite database, 
+specifcally designed for CISC 327 (Software Quality Assurance) coursework. 
+
+All of the missing functionalites have been compeleted and throughly tested using GitHub actions, and CODECOV 
 
 Students are provided with:
 
@@ -20,9 +23,6 @@ Students are provided with:
 - [`library_service.py`](library_service.py): **Business logic functions** (your main testing focus)
 - [`templates/`](templates/): HTML templates for the web interface
 - [`requirements.txt`](requirements.txt): Python dependencies
-
-## ❗ Known Issues
-The implemented functions may contain intentional bugs. Students should discover these through unit testing (to be covered in later assignments).
 
 ## Database Schema
 **Books Table:**
@@ -50,6 +50,7 @@ See [`student_instructions.md`](student_instructions.md) for complete assignment
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
