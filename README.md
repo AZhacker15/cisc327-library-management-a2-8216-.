@@ -1,6 +1,6 @@
 # Library Management System - Flask Web Application with SQLite
 
-![Tests]([![Tests](https://github.com/AZhacker15/cisc327-library-management-a2-8216-./actions/workflows/tests.yml/badge.svg)](https://github.com/AZhacker15/cisc327-library-management-a2-8216-./actions/workflows/tests.yml))
+![Tests](https://github.com/AZhacker15/cisc327-library-management-a2-8216-./actions/workflows/tests.yml/badge.svg)
 [![codecov](https://codecov.io/gh/anwardr/CISC327-CMPE327-F25/branch/main/graph/badge.svg)](https://codecov.io/gh/anwardr/CISC327-CMPE327-F25)
 
 ## Overview
@@ -50,6 +50,7 @@ See [`student_instructions.md`](student_instructions.md) for complete assignment
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
