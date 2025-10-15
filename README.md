@@ -72,12 +72,20 @@ The system shall display patron status for a particular patron.
 ## Assignment Instructions
 See [`student_instructions.md`](student_instructions.md) for complete assignment details.
 
+**Output examples**
+
+Some books in the catalog by using the add book function. 
+
+![Screenshot showing a_selection_of_books_in_the_catalog](book_selection.png)
+
+
 **Resources for students:**
 
 - [Flask Documentation](https://flask.palletsprojects.com/)
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
