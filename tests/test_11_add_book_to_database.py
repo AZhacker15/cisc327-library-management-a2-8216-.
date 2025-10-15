@@ -6,6 +6,8 @@ from library_service import (
 
 
 # This file showcases the test cases for R1, adding a book to the online catalog.
+# This is the last test function as it's adding a some new books in the catalog, in which the previous tests 
+# don't use the new books. 
 
 def get_random_ISBN():
     # This helper function is used to get a randomised ISBM output.
@@ -22,6 +24,8 @@ def get_random_ISBN():
 def test_valid_book_submission(library_setup):
     # The first testcase.
     # Since all the requirements are met and satisfied, it should return a positive statement
+    # Calles librara setup as it's directely altering the library catalog 
+    
     isbm_value = get_random_ISBN()  # Retrieve the randomized isbm value.
 
     random_copies = random.randint(4, 9)
@@ -110,7 +114,8 @@ def test_multiple_errors():
 
 
 def test_bug_isbm_no_lettering():
-    # Fixed bug.
+    # Originally there was a bug that the program will still allow ISBN tags with letters
+    # It's now fixed.
     isbm_numbers = get_random_ISBN()
     sub_isbm = isbm_numbers[0: 9]
     isbm_value = sub_isbm + "abcd"
@@ -119,3 +124,4 @@ def test_bug_isbm_no_lettering():
 
     assert success == False  # This should give me assertion error.
     assert 'ISBN must contain numbers.' in message
+
