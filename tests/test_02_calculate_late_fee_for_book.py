@@ -11,7 +11,7 @@ from library_service import (
 
 
 # This file showcases the test cases for calculating any late fees form overdue books.
-# IMPORTANT This test suite only works if R2_alt_test has already been initialized,
+# IMPORTANT This test suite only works if conftest.py has already been initialized and used as a parameter,
 # as it contains books from those tests.
 # In addition, this function calls the borrow and return book functions for these tests cases to work.
 # et_db_connection is used to edit the database in order to run tests for an overdue book.
@@ -207,3 +207,4 @@ def test_book_return_on_same_day(library_setup):
     # print(s2, m2)
     assert s2 == True
     assert "Successfully returned" in m2
+
