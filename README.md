@@ -69,15 +69,14 @@ The system shall provide search functionality using a search term and search typ
 **R7: Patron Status Report** 
 The system shall display patron status for a particular patron. 
 
-## Assignment Instructions
-See [`student_instructions.md`](student_instructions.md) for complete assignment details.
-
 **Output examples**
 
 Some books in the catalog by using the add book function. 
 
 ![Screenshot showing a_selection_of_books_in_the_catalog](book_selection.png)
 
+## Assignment Instructions
+See [`student_instructions.md`](student_instructions.md) for complete assignment details.
 
 **Resources for students:**
 
@@ -85,6 +84,7 @@ Some books in the catalog by using the add book function.
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
