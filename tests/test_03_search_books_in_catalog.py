@@ -6,7 +6,7 @@ from library_service import (
 from database import get_book_by_id
 
 # This file showcases the test cases for searching for a book in the online catalog.
-# IMPORTANT This test suite only works if R2_alt_test has already been initialized,
+# IMPORTANT This test suite only works if conftest.py has already been initialized and used as a parameter,
 # as it contains books from those tests.
 
 
@@ -242,3 +242,4 @@ def search_miss_spelling_author(library_setup):
     assert 'No matching books are found.' in message
 
     assert book_list == []
+
