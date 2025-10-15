@@ -10,7 +10,7 @@ from library_service import (
 
 
 # This file showcases the test cases for returning a book to the online catalog.
-# IMPORTANT This test suite only works if R2_alt_test has already been initialized,
+# IMPORTANT This test suite only works if conftest.py has already been initialized and used as a parameter,
 # as it contains books from those tests.
 # et_db_connection is used to edit the database in order to run tests for an overdue book.
 
@@ -233,4 +233,5 @@ def test_book_late_fee2(library_setup):
     assert success == True
     assert (f'Successfully returned "{random_book_name["title"]}" on {current_date.strftime("%Y-%m-%d")}. '
             f'Status Book is overdue by: {overdue_days} day(s), Late fee: ${overdue_days}.00.') in message
+
 
