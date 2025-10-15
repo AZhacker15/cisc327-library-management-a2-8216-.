@@ -8,7 +8,7 @@ from library_service import (
 )
 
 # This file demonstrates the test cases for showing patron's status report
-# IMPORTANT This test suite only works if R2_alt_test has already been initialized,
+# IMPORTANT This test suite only works if conftest.py has already been initialized and used as a parameter,
 # as it contains books from those tests.
 # In addition, this function calls the borrow and return book functions for these tests cases to work.
 # et_db_connection is used to edit the database in order to run tests for an overdue book.
@@ -227,3 +227,4 @@ def test_overdue_books_in_report(library_setup):
     s1, m1 = return_book_by_patron(patron_id, book_id1)
     s2, m2 = return_book_by_patron(patron_id, book_id2)
     s3, m3 = return_book_by_patron(patron_id, book_id3)
+
