@@ -10,9 +10,9 @@ from database import add_sample_data
 import random
 
 
-# This function showcases R2, which is the function that displays the catalog.
+# This function was originally going to be tested for R2, which is the function that displays the catalog.
 # However since it technically correlates with function 1, I might was well repeat some of the test functions.
-# In addition, I'll also be using this as a helper function for R3.
+# In addition, this function will now be a helper function to set up the library database.
 
 def get_random_ISBN():
     # Gets the random ISBM value
@@ -56,8 +56,8 @@ def library_setup():
         ("The Expanse: Nemesis Games", "James S. A. Corey")
     ]
 
-    # Reset the database completely for repetitive testing.
-    # Creates a new table overall. 
+    # Remind the system what the format of tables before clearing.
+    # In GitHub actions when setting up the test they might not now what it might look like.
     from database import get_db_connection
     conn = get_db_connection()
     try:
@@ -105,4 +105,5 @@ def library_setup():
 
         assert success == True
         assert "Book" in message
+
 
