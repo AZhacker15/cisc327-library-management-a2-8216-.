@@ -2,8 +2,6 @@ import pytest
 import random
 from datetime import datetime, timedelta
 
-from unittest.mock import patch
-
 from database import get_db_connection
 from library_service import (
     calculate_late_fee_for_book, borrow_book_by_patron, return_book_by_patron
@@ -207,4 +205,5 @@ def test_book_return_on_same_day(library_setup):
     # print(s2, m2)
     assert s2 == True
     assert "Successfully returned" in m2
+
 
