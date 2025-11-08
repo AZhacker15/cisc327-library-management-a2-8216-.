@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [ assignment3 ]
+    branches: [ assignment-3 ]
   pull_request:
-    branches: [ assignment3 ]
+    branches: [ assignment-3 ]
 
 jobs:
   test:
@@ -35,5 +35,6 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
 
 
