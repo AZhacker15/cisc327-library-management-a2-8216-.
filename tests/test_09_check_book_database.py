@@ -73,4 +73,3 @@ def test_return_nothing():
     # As mentioned before, the system will return nothing if both the ID and ISBN of a book doesn't exist.
     assert nothing_1 is None
     assert nothing_2 is None
-
