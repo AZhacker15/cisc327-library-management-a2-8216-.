@@ -3,12 +3,12 @@ import pytest
 from datetime import datetime, timedelta
 
 from database import get_db_connection
-from library_service import (
+from services.library_service import (
     get_patron_status_report, borrow_book_by_patron, return_book_by_patron
 )
 
 # This file demonstrates the test cases for showing patron's status report
-# IMPORTANT This test suite only works if conftest.py has already been initialized and used as a parameter,
+# IMPORTANT This test suite only works if conftest.py has already been initialized,
 # as it contains books from those tests.
 # In addition, this function calls the borrow and return book functions for these tests cases to work.
 # et_db_connection is used to edit the database in order to run tests for an overdue book.
@@ -50,7 +50,7 @@ def test_borrowed_book_in_report(library_setup):
 
     assert success == True
     assert 'List of books currently borrowed' in message
-    assert report != {} # The dict is not empty if true.
+    assert report != {}  # The dict is not empty if true.
 
     s2, m2 = return_book_by_patron(patron_id, book_id)  # Return the books
 
@@ -73,7 +73,7 @@ def test_borrowed_books_in_report(library_setup):
 
     success, message, report = get_patron_status_report(patron_id)
 
-    # print(message)
+    print(message)
 
     # Tests if the books are located in the status report.
     assert success == True
@@ -123,7 +123,7 @@ def test_return_1_book(library_setup):
 
     # The function will return positive put only display 2 books out of 3.
     success, message, report = get_patron_status_report(patron_id)
-    print(message)
+    # print(message)
 
     assert success == True
     assert 'List of books currently borrowed' in message
