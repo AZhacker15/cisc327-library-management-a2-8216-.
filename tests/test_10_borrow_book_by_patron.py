@@ -2,8 +2,9 @@ from datetime import datetime, timedelta
 
 import pytest
 
+from unittest.mock import patch
 from database import get_book_by_id, get_patron_borrow_count
-from library_service import (
+from services.library_service import (
     borrow_book_by_patron, return_book_by_patron
 )
 
@@ -109,4 +110,38 @@ def test_no_copies_found(library_setup):
     assert success == False
     assert "This book is currently not available." in message
 
+
 # Removed the second randomized function as it seems redundant
+
+# Used LLM test cases in the LLM section of assignment 2 as an example to test the database errors.
+@patch("services.library_service.get_book_by_id", return_value={"id": 1, "title": "Book A",
+                                                                "available_copies": 4})
+@patch("services.library_service.get_patron_borrow_count", return_value=3)
+@patch("services.library_service.insert_borrow_record", return_value=False)
+def test_borrow_book_borrow_failure(
+        mock_insert_borrow_records,
+        mock_get_patron_borrow_count,
+        mock_get_book_by_id,
+
+):
+    success, message = borrow_book_by_patron("123456", 1)
+    assert not success
+    assert "Database error occurred while creating borrow record" in message
+    mock_insert_borrow_records.assert_called_once()
+
+
+@patch("services.library_service.get_book_by_id", return_value={"id": 3, "title": "Book B",
+                                                                "available_copies": 6})
+@patch("services.library_service.get_patron_borrow_count", return_value=2)
+@patch("services.library_service.insert_borrow_record", return_value=True)
+@patch("services.library_service.update_book_availability", return_value=False)
+def test_borrow_book_availability_failure(
+        mock_check_availability,
+        mock_insert_borrow_records,
+        mock_get_patron_borrow_count,
+        mock_get_book_by_id,
+):
+    success, message = borrow_book_by_patron("364722", 3)
+    assert not success
+    assert "Database error occurred while updating book availability." in message
+    mock_check_availability.assert_called_once()
