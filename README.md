@@ -49,34 +49,25 @@ This project contains test cases for the following 7 requirements.
 
 Referenced in the [`requirements_specification.md`](requirements_specification.md) file. 
 
-**R1: Add Book To Catalog**
-The system shall provide a web interface to add new books to the catalog:
+**R1: Add Book To Catalog**: The system shall provide a web interface to add new books to the catalog:
 
-**R2: Book Catalog Display**
-The system shall display all books in the catalog in a a specifc table format
+**R2: Book Catalog Display**: The system shall display all books in the catalog in a a specifc table format
 
-**R3: Book Borrowing Interface**
-The system shall provide a borrowing interface to borrow books using the patron's library ID.
+**R3: Book Borrowing Interface**: The system shall provide a borrowing interface to borrow books using the patron's library ID.
 
-**R4: Book Return Processing**
-The system shall provide a return interface and able to return a book. 
+**R4: Book Return Processing**: The system shall provide a return interface and able to return a book. 
 
-**R5: Late Fee Calculation API**
-The system shall provide a system that calculates the late fee of an overdue book. 
+**R5: Late Fee Calculation API**: The system shall provide a system that calculates the late fee of an overdue book. 
 
-**R6: Book Search Functionality**
-The system shall provide search functionality using a search term and search type (title, author, isbn) as it's main parameters
+**R6: Book Search Functionality**: The system shall provide search functionality using a search term and search type (title, author, isbn) as it's main parameters
 
-**R7: Patron Status Report** 
-The system shall display patron status for a particular patron. 
+**R7: Patron Status Report**: The system shall display patron status for a particular patron. 
 
-**R8: Pay Late Fees** 
-The system shall allow patrons to pay their late fees for an overdue book. If they do have one. 
+**R8: Pay Late Fees**: The system shall allow patrons to pay their late fees for an overdue book. If they do have one. 
 
-**R9: Refunds Late Payment** 
-The system shall allow patrons to refund their late fee, that is under 15$.
+**R9: Refunds Late Payment**: The system shall allow patrons to refund their late fee, that is under 15$.
 
-**Output examples**
+**Output examples** (Note this is somewhat outdated considering that I'm unable to run to application. 
 
 Some books in the catalog by using the add book function. 
 
@@ -91,6 +82,7 @@ See [`student_instructions.md`](student_instructions.md) for complete assignment
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
