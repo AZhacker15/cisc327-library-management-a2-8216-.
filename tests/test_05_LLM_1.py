@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from library_service import return_book_by_patron
+from services.library_service import return_book_by_patron
 
 
 # 1️⃣ Invalid Patron ID Format
@@ -12,7 +12,7 @@ def test_return_book_invalid_patron_id():
 
 
 # 2️⃣ Book Not Found in Database
-@patch("library_service.get_book_by_id", return_value=None)
+@patch("services.library_service.get_book_by_id", return_value=None)
 def test_return_book_not_found(mock_get_book):
     """Should fail when the book ID does not exist in the database."""
     success, message = return_book_by_patron("123456", 999)
@@ -22,8 +22,8 @@ def test_return_book_not_found(mock_get_book):
 
 
 # 3️⃣ Patron Has No Books Borrowed
-@patch("library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
-@patch("library_service.get_patron_borrow_count", return_value=0)
+@patch("services.library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
+@patch("services.library_service.get_patron_borrow_count", return_value=0)
 def test_return_book_no_books_borrowed(mock_borrow_count, mock_get_book):
     """Should fail when patron has no books currently borrowed."""
     success, message = return_book_by_patron("123456", 1)
@@ -34,10 +34,10 @@ def test_return_book_no_books_borrowed(mock_borrow_count, mock_get_book):
 
 
 # 4️⃣ Database Error: Return Date Update Fails
-@patch("library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
-@patch("library_service.get_patron_borrow_count", return_value=1)
-@patch("library_service.calculate_late_fee_for_book", return_value=(True, "Late fee calculated", 0.0))
-@patch("library_service.update_borrow_record_return_date", return_value=False)
+@patch("services.library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
+@patch("services.library_service.get_patron_borrow_count", return_value=1)
+@patch("services.library_service.calculate_late_fee_for_book", return_value=(True, "Late fee calculated", 0.0))
+@patch("services.library_service.update_borrow_record_return_date", return_value=False)
 def test_return_book_update_date_failure(
         mock_update_date, mock_calc_fee, mock_borrow_count, mock_get_book
 ):
@@ -49,11 +49,11 @@ def test_return_book_update_date_failure(
 
 
 # 5️⃣ Successful Book Return
-@patch("library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
-@patch("library_service.get_patron_borrow_count", return_value=1)
-@patch("library_service.calculate_late_fee_for_book", return_value=(True, "Late fee calculated", 0.0))
-@patch("library_service.update_borrow_record_return_date", return_value=True)
-@patch("library_service.update_book_availability", return_value=True)
+@patch("services.library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
+@patch("services.library_service.get_patron_borrow_count", return_value=1)
+@patch("services.library_service.calculate_late_fee_for_book", return_value=(True, "Late fee calculated", 0.0))
+@patch("services.library_service.update_borrow_record_return_date", return_value=True)
+@patch("services.library_service.update_book_availability", return_value=True)
 def test_return_book_success(
         mock_update_availability,
         mock_update_date,
@@ -73,11 +73,11 @@ def test_return_book_success(
 
 
 # 6️⃣ Database Error: Book Availability Update Fails
-@patch("library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
-@patch("library_service.get_patron_borrow_count", return_value=1)
-@patch("library_service.calculate_late_fee_for_book", return_value=(True, "Late fee calculated", 0.0))
-@patch("library_service.update_borrow_record_return_date", return_value=True)
-@patch("library_service.update_book_availability", return_value=False)
+@patch("services.library_service.get_book_by_id", return_value={"id": 1, "title": "Book A"})
+@patch("services.library_service.get_patron_borrow_count", return_value=1)
+@patch("services.library_service.calculate_late_fee_for_book", return_value=(True, "Late fee calculated", 0.0))
+@patch("services.library_service.update_borrow_record_return_date", return_value=True)
+@patch("services.library_service.update_book_availability", return_value=False)
 def test_return_book_update_availability_failure(
         mock_update_availability,
         mock_update_date,
