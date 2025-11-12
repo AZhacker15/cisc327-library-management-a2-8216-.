@@ -70,6 +70,12 @@ The system shall provide search functionality using a search term and search typ
 **R7: Patron Status Report** 
 The system shall display patron status for a particular patron. 
 
+**R8: Pay Late Fees** 
+The system shall allow patrons to pay their late fees for an overdue book. If they do have one. 
+
+**R9: Refunds Late Payment** 
+The system shall allow patrons to refund their late fee, that is under 15$.
+
 **Output examples**
 
 Some books in the catalog by using the add book function. 
@@ -85,6 +91,7 @@ See [`student_instructions.md`](student_instructions.md) for complete assignment
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
