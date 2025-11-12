@@ -2,7 +2,7 @@ from array import array
 from zoneinfo import available_timezones
 
 import pytest
-from library_service import (
+from services.library_service import (
     add_book_to_catalog
 )
 
@@ -56,11 +56,13 @@ def library_setup():
         ("The Expanse: Nemesis Games", "James S. A. Corey")
     ]
 
-    # Remind the system what the format of tables before clearing.
-    # In GitHub actions when setting up the test they might not now what it might look like.
+    # Reset the database completely for repetitive testing. To prevent duplication
+    # Creates a new table overall.
     from database import get_db_connection
     conn = get_db_connection()
     try:
+        # Remind the system what the format of tables before clearing.
+        # In GitHub actions when setting up the test they might not now what it might look like.
         conn.execute('''
                 CREATE TABLE IF NOT EXISTS books (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -105,5 +107,6 @@ def library_setup():
 
         assert success == True
         assert "Book" in message
+
 
 
