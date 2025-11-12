@@ -1,5 +1,5 @@
 # Library Management System - Flask Web Application with SQLite 
-###( Assignment 3 version )
+### Assignment 3 version 
 #### Queens university. Studnent num #10218216
 
 ![Tests](https://github.com/AZhacker15/cisc327-library-management-a2-8216-./actions/workflows/tests.yml/badge.svg)
@@ -85,6 +85,7 @@ See [`student_instructions.md`](student_instructions.md) for complete assignment
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
