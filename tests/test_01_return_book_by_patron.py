@@ -4,19 +4,19 @@ import pytest
 import random
 
 from database import get_book_by_id, get_patron_borrowed_books, get_patron_borrow_count, get_db_connection
-from library_service import (
+from services.library_service import (
     return_book_by_patron, borrow_book_by_patron
 )
 
 
 # This file showcases the test cases for returning a book to the online catalog.
-# IMPORTANT This test suite only works if conftest.py has already been initialized and used as a parameter,
+# IMPORTANT This test suite only works if conftest.py has already been initialized,
 # as it contains books from those tests.
 # et_db_connection is used to edit the database in order to run tests for an overdue book.
 
 
 def test_return_random_book(library_setup):
-    # This is a helper function that allows the user to borrow a random book. 
+    # This function test a patron that borrows a random book (Taken from R3)
 
     current_time = datetime.now()
     patron_id = "526910"
@@ -24,12 +24,12 @@ def test_return_random_book(library_setup):
     random_book_name = get_book_by_id(random_book_id)
     due_date = current_time + timedelta(days=14)
     success, message = borrow_book_by_patron(patron_id, random_book_id)
-    # print(success, message) (Used for testing to see the results) You could remove it. 
+    # print(success, message) (Used for testing to see the results)
     # print(get_patron_borrow_count(patron_id)) (Used for testing to see the results)
 
     if success:
         assert success == True
-        assert (f'Successfully borrowed "{random_book_name["title"]}". Due date: {due_date.strftime("%Y-%m-%d")}'
+        assert (f'Successfully borrowed "{random_book_name["title"]}". Due date: {due_date.strftime("%Y-%m-%d")}.'
                 in message)
     else:
         assert success == False
@@ -54,17 +54,16 @@ def test_valid_return(library_setup):
 
     assert success == True
     assert (f'Successfully returned "Narnia" on {current_date.strftime("%Y-%m-%d")}. '
-            f'Status Book is not overdue, no outstanding fees, Late fee: $0.00.') in message
+            f'Status: Book is not overdue, no outstanding fees, Late fee: $0.00.') in message
 
 
 def test_valid_return2(library_setup):
     # A positive test case that returns a random book.
-    # Which uses the helper function to borrow the book.
 
-    valid_id = "526910"  # The patron ID that borrows a random book.
+    valid_id = "526910"  # The patron that borrows a random book.
     patron_info = get_patron_borrowed_books(valid_id)
     if not patron_info:
-        # Added this since it will give me an index error. If the book that they borrowed is not available
+        # Added this since it will give me an index error. If the book borrowed is not available
         print("No books has been borrowed yet")
         pass
     else:
@@ -76,7 +75,7 @@ def test_valid_return2(library_setup):
 
         assert success == True
         assert (f'Successfully returned "{first_title["title"]}" on {current_date.strftime("%Y-%m-%d")}. '
-                f'Status Book is not overdue, no outstanding fees, Late fee: $0.00.') in message
+                f'Status: Book is not overdue, no outstanding fees, Late fee: $0.00.') in message
 
 
 def test_valid_return3(library_setup):
@@ -94,7 +93,7 @@ def test_valid_return3(library_setup):
 
     assert success == True
     assert (f'Successfully returned "Percy Jackson" on {current_date.strftime("%Y-%m-%d")}. '
-            f'Status Book is not overdue, no outstanding fees, Late fee: $0.00.') in message
+            f'Status: Book is not overdue, no outstanding fees, Late fee: $0.00.') in message
 
 
 def test_invalid_id(library_setup):
@@ -162,7 +161,7 @@ def test_book_already_returned(library_setup):
     assert s2 == True
     assert "Successfully returned" in m2
 
-    # If the user returns the book once again, the function will return false.
+    # If the user returns the book once again, th function will return false.
     success, message = return_book_by_patron(patron_id, book_id)
     print(success, message)
 
@@ -179,11 +178,10 @@ def test_book_late_fee1(library_setup):
     assert s1 == True
     assert "Successfully borrowed" in m1
 
-    # In order to create a scenario for an overdue book 
-    # I had to manually edit the database by altering the due date to be earler than the current time. 
+    # In order to create a scenario for an overdue book I Had to manually edit the database by altering the due date
     conn = get_db_connection()
     current_date = datetime.now()
-    overdue_date = datetime.now() - timedelta(days=3)  # Make the dae overdue by 3 days in advance.
+    overdue_date = datetime.now() - timedelta(days=3)  # Make the dae overdue by 3 days.
     conn.execute('''
         UPDATE borrow_records 
         SET due_date = ? 
@@ -197,7 +195,7 @@ def test_book_late_fee1(library_setup):
 
     assert success == True
     assert (f'Successfully returned "To Kill a Mockingbird" on {current_date.strftime("%Y-%m-%d")}. '
-            f'Status Book is overdue by: 3 day(s), Late fee: $3.00.') in message
+            f'Status: Book is overdue by: 3 day(s), Late fee: $3.00.') in message
 
 
 def test_book_late_fee2(library_setup):
@@ -220,7 +218,6 @@ def test_book_late_fee2(library_setup):
     overdue_days = random.randint(1, 15)  # Randomizes the days overdue
     overdue_date = datetime.now() - timedelta(days=overdue_days)
 
-    # Edits the due date. 
     conn = get_db_connection()
     conn.execute('''
             UPDATE borrow_records 
@@ -235,7 +232,8 @@ def test_book_late_fee2(library_setup):
 
     assert success == True
     assert (f'Successfully returned "{random_book_name["title"]}" on {current_date.strftime("%Y-%m-%d")}. '
-            f'Status Book is overdue by: {overdue_days} day(s), Late fee: ${overdue_days}.00.') in message
+            f'Status: Book is overdue by: {overdue_days} day(s), Late fee: ${overdue_days}.00.') in message
+
 
 
 
