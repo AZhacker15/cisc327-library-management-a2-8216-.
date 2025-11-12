@@ -2,7 +2,7 @@
 ### Assignment 3 version 
 #### Queens university. Studnent num #10218216
 
-![Tests](https://github.com/AZhacker15/cisc327-library-management-a2-8216-./actions/workflows/tests.yml/badge.svg)
+[![Tests](https://github.com/AZhacker15/cisc327-library-management-a2-8216-./actions/workflows/tests.yml/badge.svg)
 [![codecov](https://codecov.io/github/AZhacker15/cisc327-library-management-a2-8216-./graph/badge.svg?token=J1AX1AJMML) 
 
 ## Overview
@@ -85,6 +85,7 @@ See [`student_instructions.md`](student_instructions.md) for complete assignment
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
