@@ -1,6 +1,6 @@
 import pytest
 import random
-from library_service import (
+from services.library_service import (
     search_books_in_catalog
 )
 from database import get_book_by_id
@@ -169,11 +169,11 @@ def test_no_books_ISBN(library_setup):
     assert book_list == []
 
 
-def invalid_isbn(library_setup):
+def test_invalid_isbn(library_setup):
     # Invalid test case by using an invalid ISBN value.
     # Again when searching for a book using an ISBN value the term needs to be precise.
 
-    targeted_isbn = "12390123"
+    targeted_isbn = "abcdefg"
     success, message, book_list = search_books_in_catalog(targeted_isbn, 'isbn')
 
     assert success == False
@@ -206,7 +206,7 @@ def test_no_books_title(library_setup):
     assert book_list == []
 
 
-def new_words_title(library_setup):
+def test_new_words_title(library_setup):
     # A negative test case by searching a title with additional wording
     # NOTE: The function uses partial matching, but doesn't recognize terms with new lettering
     # Or misspelling mistakes.
@@ -220,7 +220,7 @@ def new_words_title(library_setup):
     assert book_list == []
 
 
-def search_miss_spelling_title(library_setup):
+def test_search_miss_spelling_title(library_setup):
     # A negative test case of misspelling a title
 
     targeted_title = "The gret gatbsy"
@@ -232,7 +232,7 @@ def search_miss_spelling_title(library_setup):
     assert book_list == []
 
 
-def search_miss_spelling_author(library_setup):
+def test_search_miss_spelling_author(library_setup):
     # A negative test case of misspelling an author's name.
 
     targeted_title = "steven king"
