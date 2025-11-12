@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 # --- 1. Invalid Patron ID (format or length) ---
 def test_invalid_patron_id_format():
     """Should reject invalid patron IDs (non-digit or incorrect length)."""
-    from library_service import get_patron_status_report
+    from services.library_service import get_patron_status_report
 
     success, message, report = get_patron_status_report("abc123")
     assert not success
@@ -15,10 +15,10 @@ def test_invalid_patron_id_format():
 
 
 # --- 2. Patron Not Found in Database ---
-@patch("library_service.get_patron_borrowed_books", return_value=None)
+@patch("services.library_service.get_patron_borrowed_books", return_value=None)
 def test_patron_not_found(mock_borrowed_books):
     """Should handle nonexistent patron gracefully."""
-    from library_service import get_patron_status_report
+    from services.library_service import get_patron_status_report
 
     success, message, report = get_patron_status_report("123456")
     assert not success
@@ -27,10 +27,10 @@ def test_patron_not_found(mock_borrowed_books):
 
 
 # --- 3. Patron Exists but Has No Borrowed Books ---
-@patch("library_service.get_patron_borrowed_books", return_value=[])
+@patch("services.library_service.get_patron_borrowed_books", return_value=[])
 def test_patron_no_borrowed_books(mock_borrowed_books):
     """Should handle valid patron who has not borrowed any books."""
-    from library_service import get_patron_status_report
+    from services.library_service import get_patron_status_report
 
     success, message, report = get_patron_status_report("123456")
     assert not success
@@ -39,11 +39,11 @@ def test_patron_no_borrowed_books(mock_borrowed_books):
 
 
 # --- 4. Patron Has Borrowed Books, All On Time ---
-@patch("library_service.get_patron_borrowed_books")
-@patch("library_service.calculate_late_fee_for_book")
+@patch("services.library_service.get_patron_borrowed_books")
+@patch("services.library_service.calculate_late_fee_for_book")
 def test_patron_with_borrowed_books_on_time(mock_calc_fee, mock_borrowed_books):
     """Should return a valid report when patron has borrowed books (no overdue fees)."""
-    from library_service import get_patron_status_report
+    from services.library_service import get_patron_status_report
 
     # Mock borrowed book data
     today = datetime.now()
@@ -69,11 +69,11 @@ def test_patron_with_borrowed_books_on_time(mock_calc_fee, mock_borrowed_books):
 
 
 # --- 5. Patron Has Overdue Book(s) + Database Defensive Guard ---
-@patch("library_service.get_patron_borrowed_books")
-@patch("library_service.calculate_late_fee_for_book")
+@patch("services.library_service.get_patron_borrowed_books")
+@patch("services.library_service.calculate_late_fee_for_book")
 def test_patron_overdue_books_and_database_error(mock_calc_fee, mock_borrowed_books):
     """Should handle overdue books correctly and sum late fees."""
-    from library_service import get_patron_status_report
+    from services.library_service import get_patron_status_report
 
     today = datetime.now()
     mock_borrowed_books.return_value = [
@@ -110,13 +110,11 @@ def test_patron_overdue_books_and_database_error(mock_calc_fee, mock_borrowed_bo
 
 
 # ✅ Defensive Guard - If Database returns None
-@patch("library_service.get_patron_borrowed_books", return_value=None)
+@patch("services.library_service.get_patron_borrowed_books", return_value=None)
 def test_database_returns_none(mock_borrowed_books):
     """Should handle None response gracefully instead of crashing."""
-    from library_service import get_patron_status_report
+    from services.library_service import get_patron_status_report
     try:
         success, message, report = get_patron_status_report("654321")
     except TypeError:
         pytest.fail("Function crashed with TypeError when database returned None")
-
-
