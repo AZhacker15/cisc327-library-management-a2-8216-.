@@ -26,7 +26,7 @@ jobs:
     
     - name: Run tests with coverage
       run: |
-        pytest tests/ -v --cov=library_service --cov-report=xml
+        pytest tests/ -v --cov=services.library_service --cov-report=xml
     
     - name: Upload coverage to Codecov
 
@@ -36,6 +36,7 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
 
 
 
