@@ -1,13 +1,13 @@
 import pytest
 import random
-from library_service import (
+from unittest.mock import patch
+
+from services.library_service import (
     add_book_to_catalog
 )
 
 
 # This file showcases the test cases for R1, adding a book to the online catalog.
-# This is the last test function as it's adding a some new books in the catalog, in which the previous tests 
-# don't use the new books. 
 
 def get_random_ISBN():
     # This helper function is used to get a randomised ISBM output.
@@ -24,8 +24,6 @@ def get_random_ISBN():
 def test_valid_book_submission(library_setup):
     # The first testcase.
     # Since all the requirements are met and satisfied, it should return a positive statement
-    # Calles librara setup as it's directely altering the library catalog 
-    
     isbm_value = get_random_ISBN()  # Retrieve the randomized isbm value.
 
     random_copies = random.randint(4, 9)
@@ -48,6 +46,15 @@ def test_book_title_too_long():
 
     assert success == False
     assert "Title must be less than 200 characters." in message
+
+
+def test_no_title():
+    # Added a negative test case if the book contains no title.
+    isbm_value = get_random_ISBN()
+    success, message = add_book_to_catalog("", "Bob", isbm_value, 2)
+
+    assert success == False
+    assert "Title is required." in message
 
 
 def test_book_a_name_too_long():
@@ -84,7 +91,7 @@ def test_repeated_ISBN(library_setup):
     # Since I would need to use this command twice for this test to
     # run properly I would need to implement and if an else statement
     # Note I'm adding a different book as an example
-    
+
     success, message = add_book_to_catalog("The Truman Novel", "Kristoff", "1862489149691", 4)
     success, message = add_book_to_catalog("The Truman Novel", "Kristoff", "1862489149691", 4)
 
@@ -114,8 +121,7 @@ def test_multiple_errors():
 
 
 def test_bug_isbm_no_lettering():
-    # Originally there was a bug that the program will still allow ISBN tags with letters
-    # It's now fixed.
+    # Fixed bug.
     isbm_numbers = get_random_ISBN()
     sub_isbm = isbm_numbers[0: 9]
     isbm_value = sub_isbm + "abcd"
@@ -125,3 +131,15 @@ def test_bug_isbm_no_lettering():
     assert success == False  # This should give me assertion error.
     assert 'ISBN must contain numbers.' in message
 
+
+@patch("services.library_service.insert_book", return_value=False)
+def test_add_book_database_error(
+        mock_insert_book
+):
+    isbm_numbers = get_random_ISBN()
+    success, message = add_book_to_catalog("Luigi", "Mario", isbm_numbers, 5)
+
+    assert success == False
+    assert 'Database error occurred while adding the book.' in message
+
+    mock_insert_book.assert_called_once()
