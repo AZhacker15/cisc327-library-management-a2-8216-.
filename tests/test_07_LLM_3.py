@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from library_service import search_books_in_catalog
+from services.library_service import search_books_in_catalog
 
 
 # 1️⃣ Empty Search Term
@@ -8,7 +8,7 @@ def test_search_books_empty_search_term():
     """Should fail when search term is empty or whitespace."""
     success, message, results = search_books_in_catalog("   ", "title")
     assert not success
-    assert message == "Search input must not be empty"
+    assert message == "Search input must not be empty."
     assert results == []
 
 
@@ -22,7 +22,7 @@ def test_search_books_invalid_type():
 
 
 # 3️⃣ ISBN Search — Exact Match Success
-@patch("library_service.get_book_by_isbn")
+@patch("services.library_service.get_book_by_isbn")
 def test_search_books_isbn_found(mock_get_book_by_isbn):
     """Should find a book using exact ISBN match."""
     mock_get_book_by_isbn.return_value = {
@@ -43,7 +43,7 @@ def test_search_books_isbn_found(mock_get_book_by_isbn):
 
 
 # 4️⃣ Author Partial Match — Case Insensitive Search
-@patch("library_service.get_all_books")
+@patch("services.library_service.get_all_books")
 def test_search_books_author_partial_match(mock_get_all_books):
     """Should find books by partial author name regardless of case."""
     mock_get_all_books.return_value = [
@@ -61,7 +61,7 @@ def test_search_books_author_partial_match(mock_get_all_books):
     mock_get_all_books.assert_called_once()
 
 
-@patch("library_service.get_all_books", return_value=None)
+@patch("services.library_service.get_all_books", return_value=None)
 def test_search_books_database_failure(mock_get_all_books):
     """Should handle None response from database gracefully instead of crashing."""
     success, message, results = search_books_in_catalog("harry", "title")
