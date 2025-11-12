@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install pytest pytest-cov
+        pip install pytest pytest-cov requests
 
     - name: Add project to PYTHONPATH
       run: echo "PYTHONPATH=." >> $GITHUB_ENV
@@ -39,6 +39,7 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
 
 
 
