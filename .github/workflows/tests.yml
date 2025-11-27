@@ -27,6 +27,15 @@ jobs:
     - name: Add project to PYTHONPATH
       run: echo "PYTHONPATH=." >> $GITHUB_ENV
     
+    - name: Install Python Playwright.
+      run: |
+          playwright install --with-deps
+
+    - name: Begin Flask app. 
+      run: |
+        nohup python app.py &
+        sleep 3
+
     - name: Run tests with coverage
       run: |
         pytest tests/ -v --cov=services --cov-report=xml
@@ -39,7 +48,6 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
 
 
 
