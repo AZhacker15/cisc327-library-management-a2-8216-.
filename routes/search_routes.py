@@ -3,7 +3,7 @@ Search Routes - Book search functionality
 """
 
 from flask import Blueprint, render_template, request, flash
-from library_service import search_books_in_catalog
+from services.library_service import search_books_in_catalog
 
 search_bp = Blueprint('search', __name__)
 
@@ -26,3 +26,4 @@ def search_books():
         flash('Search functionality is not yet implemented.', 'error')
     
     return render_template('search.html', books=books, search_term=search_term, search_type=search_type)
+
