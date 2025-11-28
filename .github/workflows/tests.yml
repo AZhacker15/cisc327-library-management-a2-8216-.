@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [ assignment-3 ]
+    branches: [ assignment_4 ]
   pull_request:
-    branches: [ assignment-3 ]
+    branches: [ assignment_4 ]
   workflow_dispatch:
 
 jobs:
@@ -48,6 +48,7 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
 
 
 
