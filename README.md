@@ -1,5 +1,5 @@
 # Library Management System - Flask Web Application with SQLite 
-### Assignment 3 version 
+### Assignment 4 version 
 #### Queens university. Studnent num #10218216
 
 ![Tests](https://github.com/AZhacker15/cisc327-library-management-a2-8216-./actions/workflows/tests.yml/badge.svg)
@@ -42,6 +42,11 @@ Students are provided with:
 - `borrow_date` (TEXT NOT NULL)
 - `due_date` (TEXT NOT NULL)
 - `return_date` (TEXT NULL)
+
+### End-to-End Testing:
+This branch contains code that simulates real user behiviour on the application. One is for 
+adding a book while the other returns one. These functions are validated and testing using
+**Python Playweight**.
 
 ### Test Cases:
 
