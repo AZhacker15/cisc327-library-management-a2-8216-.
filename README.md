@@ -44,8 +44,8 @@ Students are provided with:
 - `return_date` (TEXT NULL)
 
 ### End-to-End Testing:
-This branch contains code that simulates real user behiviour on the application. One is for 
-adding a book while the other returns one. These functions are validated and testing using
+This branch contains code that simulates real user behiviour on the application. One of these actions is the user 
+adding a book while the other returns one. These test cases are validated and tested using the tool 
 **Python Playweight**.
 
 ### Test Cases:
@@ -87,6 +87,7 @@ See [`student_instructions.md`](student_instructions.md) for complete assignment
 - [Test Driven Development](https://www.datacamp.com/tutorial/test-driven-development-in-python)
 - [Pytest framework](https://realpython.com/pytest-python-testing/)
 - [Python Blueprint](https://flask.palletsprojects.com/en/stable/blueprints)
+
 
 
 
